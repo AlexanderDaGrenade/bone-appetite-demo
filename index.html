@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bone Appetite — Fresh, gently cooked dog food in Copenhagen</title>
+<meta name="description" content="Freshly prepared, sous-vide cooked meals for healthy adult dogs. FEDIAF-aligned nutrition, made in small batches in Copenhagen and delivered frozen to your door.">
+<link rel="icon" href="images/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbf3e8; --paper:#fffaf3; --tan:#ecd6ba; --bark:#47240c; --bark-deep:#2c1505;
+    --ink:#2a1708; --muted:#7a6352; --rust:#b14d1e; --orange:#f28a3a; --saffron:#f6b81a;
+    --sage:#5f7f43; --line:#e7d7c3; --radius:24px; --max:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:clip}
+  body{font-family:"DM Sans",system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;line-height:1;letter-spacing:-.03em}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .eyebrow{display:inline-flex;align-items:center;gap:.6em;font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rust)}
+  .eyebrow svg{width:16px;height:16px}
+  .btn{display:inline-flex;align-items:center;gap:.6em;padding:1em 1.6em;border-radius:999px;font-weight:600;font-size:.98rem;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .25s,background .25s,color .25s,box-shadow .25s}
+  .btn:hover{transform:translateY(-3px)}
+  .btn svg{width:18px;height:18px;transition:transform .25s}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-primary{background:var(--bark);color:#fff;box-shadow:0 12px 30px rgba(71,36,12,.28)}
+  .btn-primary:hover{background:var(--rust)}
+  .btn-orange{background:var(--orange);color:var(--bark-deep);box-shadow:0 12px 30px rgba(242,138,58,.35)}
+  .btn-orange:hover{background:#ff9b4d}
+  .btn-line{border:1.5px solid var(--bark);color:var(--bark);background:transparent}
+  .btn-line:hover{background:var(--bark);color:#fff}
+
+  /* TOP BAR + NAV */
+  .topbar{background:var(--bark);color:var(--tan);font-size:.82rem;text-align:center;padding:.55rem 16px}
+  .topbar strong{color:#fff;font-weight:600}
+  header{position:sticky;top:0;z-index:50;background:rgba(251,243,232,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:box-shadow .3s}
+  header.scrolled{box-shadow:0 1px 0 var(--line),0 10px 30px rgba(71,36,12,.06)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:78px;gap:1rem}
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+  .brand-mark{width:50px;height:50px;border-radius:50%;overflow:hidden;position:relative;background:#e9c597;flex:none;box-shadow:inset 0 0 0 2px rgba(71,36,12,.08)}
+  .brand-mark img{position:absolute;width:96px;max-width:none;left:-24px;top:-21px}
+  .brand-name{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.03em;color:var(--bark);line-height:1}
+  .brand-name span{color:var(--orange)}
+  .nav-links{display:flex;gap:2rem;align-items:center;list-style:none}
+  .nav-links a{text-decoration:none;font-size:.95rem;font-weight:500;color:var(--ink);position:relative}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--orange);transition:right .3s}
+  .nav-links a:not(.btn):hover::after{right:0}
+  .nav-links .btn{padding:.75em 1.3em;font-size:.92rem;color:#fff}
+  .login{opacity:.75}
+  .menu-toggle{display:none;background:none;border:0;cursor:pointer;color:var(--bark);padding:6px}
+
+  /* HERO */
+  .hero{padding:56px 0 96px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:3.5rem;align-items:center}
+  .hero h1{font-size:clamp(3rem,7.2vw,6.4rem);color:var(--bark);margin:1.1rem 0 1.5rem}
+  .hero h1 .serif{color:var(--rust);font-size:1.08em;letter-spacing:-.02em}
+  .hero-lede{font-size:1.18rem;color:var(--muted);max-width:520px}
+  .hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap;margin:2.2rem 0 2.4rem;align-items:center}
+  .price-note{font-size:.92rem;color:var(--muted)}
+  .price-note b{color:var(--bark);font-size:1.1rem}
+  .trust{display:flex;gap:1.6rem;flex-wrap:wrap;padding-top:1.8rem;border-top:1px dashed #d8c3a8}
+  .trust div{display:flex;align-items:center;gap:.6rem;font-size:.86rem;line-height:1.25;color:var(--muted)}
+  .trust b{display:block;color:var(--bark);font-size:.95rem}
+  .trust .tick{width:34px;height:34px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--sage);box-shadow:0 0 0 1px var(--line)}
+  .trust .tick svg{width:18px;height:18px}
+
+  .hero-visual{position:relative;aspect-ratio:1/1.02}
+  .hero-blob{position:absolute;inset:4% 2% 0 6%;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:linear-gradient(150deg,var(--saffron),var(--orange) 70%);animation:morph 14s ease-in-out infinite alternate}
+  @keyframes morph{to{border-radius:56% 44% 52% 48% / 42% 58% 42% 58%}}
+  .hero-photo{position:absolute;inset:12% 6% 10% 12%;border-radius:32px;overflow:hidden;box-shadow:0 40px 80px -20px rgba(71,36,12,.45);transform:rotate(-3deg)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .plate{position:absolute;width:44%;right:-4%;bottom:-6%;filter:drop-shadow(0 30px 30px rgba(71,36,12,.35));animation:float 6s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-12px) rotate(4deg)}}
+  .sticker{position:absolute;left:-2%;top:2%;width:132px;height:132px;border-radius:50%;background:var(--bark);color:#fff;display:grid;place-items:center;text-align:center;font-family:"Bricolage Grotesque";font-weight:800;line-height:1;box-shadow:0 20px 40px rgba(71,36,12,.3);transform:rotate(-10deg)}
+  .sticker small{display:block;font-family:"DM Sans";font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tan);margin-bottom:.3rem}
+  .sticker span{font-size:2.2rem}
+  .sticker em{display:block;font-style:normal;font-size:.8rem;font-family:"DM Sans";font-weight:600;margin-top:.25rem;color:var(--saffron)}
+  .chip-float{position:absolute;background:var(--paper);border-radius:999px;padding:.6rem 1rem .6rem .6rem;display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:600;color:var(--bark);box-shadow:0 18px 40px rgba(71,36,12,.18)}
+  .chip-float i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:1rem}
+  .chip-a{left:-6%;bottom:18%;animation:float 7s ease-in-out infinite .6s}
+  .chip-a i{background:#e6efd9}
+  .chip-b{right:2%;top:4%;animation:float 8s ease-in-out infinite 1.2s}
+  .chip-b i{background:#fde7c7}
+
+  /* MARQUEE */
+  .marquee{background:var(--bark);color:var(--cream);overflow:hidden;white-space:nowrap;padding:1.1rem 0;transform:rotate(-1.2deg);margin:0 -20px;position:relative;z-index:2}
+  .marquee-track{display:inline-flex;animation:marquee 38s linear infinite;font-family:"Bricolage Grotesque";font-weight:700;font-size:1.5rem;letter-spacing:-.02em}
+  .marquee-track span{display:inline-flex;align-items:center;gap:2.2rem;padding-right:2.2rem}
+  .marquee-track span::after{content:"";width:22px;height:12px;background:var(--orange);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 24'%3E%3Cpath d='M7 2a5 5 0 0 1 4.6 3H32.4A5 5 0 1 1 37 12a5 5 0 1 1-4.6 7H11.6A5 5 0 1 1 7 12a5 5 0 1 1 0-10z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 24'%3E%3Cpath d='M7 2a5 5 0 0 1 4.6 3H32.4A5 5 0 1 1 37 12a5 5 0 1 1-4.6 7H11.6A5 5 0 1 1 7 12a5 5 0 1 1 0-10z'/%3E%3C/svg%3E") center/contain no-repeat}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  section{padding:120px 0}
+  .section-head{max-width:700px;margin-bottom:3.5rem}
+  .section-head.center{text-align:center;margin-left:auto;margin-right:auto}
+  .section-head h2{font-size:clamp(2.3rem,5vw,4rem);color:var(--bark);margin:1rem 0 1.1rem}
+  .section-head h2 .serif{color:var(--rust)}
+  .section-head p{color:var(--muted);font-size:1.12rem}
+
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+  .why-card{background:var(--paper);border-radius:var(--radius);padding:2rem 1.7rem 2.1rem;border:1px solid var(--line);transition:transform .35s,box-shadow .35s}
+  .why-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -25px rgba(71,36,12,.35)}
+  .why-icon{width:62px;height:62px;border-radius:20px;display:grid;place-items:center;margin-bottom:1.6rem}
+  .why-icon svg{width:30px;height:30px}
+  .why-card:nth-child(1) .why-icon{background:#e6efd9;color:var(--sage)}
+  .why-card:nth-child(2) .why-icon{background:#fde2cc;color:var(--rust)}
+  .why-card:nth-child(3) .why-icon{background:#fdefc4;color:#a37400}
+  .why-card:nth-child(4) .why-icon{background:#eadfd3;color:var(--bark)}
+  .why-card h3{font-size:1.35rem;color:var(--bark);margin-bottom:.7rem;letter-spacing:-.02em}
+  .why-card p{color:var(--muted);font-size:.97rem}
+
+  .why-head{display:grid;grid-template-columns:1.4fr .8fr;gap:3rem;align-items:end;margin-bottom:3.5rem}
+  .why-head .section-head{margin-bottom:0}
+  .why-photo{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/4.4;transform:rotate(2deg);box-shadow:0 30px 60px -25px rgba(71,36,12,.45)}
+  .why-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+  .why-photo figcaption{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--bark);font-family:"Instrument Serif";font-style:italic;font-size:1.25rem;padding:.35rem 1rem;border-radius:999px}
+
+  /* BAND */
+  .band{padding:0 24px 120px;max-width:1440px;margin:0 auto}
+  .band-card{position:relative;border-radius:40px;overflow:hidden;min-height:560px;display:flex;align-items:flex-end;background:var(--bark)}
+  .band-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+  .band-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(44,21,5,0) 30%,rgba(44,21,5,.85) 100%)}
+  .band-content{position:relative;z-index:2;padding:clamp(2rem,5vw,4rem);width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;color:#fff}
+  .band-content h2{font-size:clamp(2.2rem,5vw,4.2rem);max-width:12ch}
+  .band-content h2 .serif{color:var(--saffron)}
+  .stats{display:flex;gap:2.4rem;flex-wrap:wrap}
+  .stats b{display:block;font-family:"Bricolage Grotesque";font-size:2.6rem;letter-spacing:-.04em;line-height:1}
+  .stats span{font-size:.88rem;color:#e8d6bf}
+  .faq-photo{margin-top:2rem;border-radius:var(--radius);aspect-ratio:3/2;object-fit:cover;width:100%}
+
+  /* RECIPES */
+  .recipes{background:var(--paper);border-radius:48px 48px 0 0}
+  .recipe-tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+  .recipe-tab{display:flex;align-items:center;gap:.7rem;padding:.5rem 1.2rem .5rem .5rem;border-radius:999px;border:1.5px solid var(--line);background:var(--cream);font:600 1rem "DM Sans",sans-serif;color:var(--bark);cursor:pointer;transition:all .25s}
+  .recipe-tab img{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#fff}
+  .recipe-tab:hover{border-color:var(--bark)}
+  .recipe-tab[aria-selected="true"]{background:var(--bark);color:#fff;border-color:var(--bark)}
+  .recipe-stage{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:center}
+  .recipe-photo{border-radius:32px;overflow:hidden;aspect-ratio:4/5;position:relative;background:var(--tan)}
+  .recipe-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s,transform .8s}
+  .recipe-photo img.swap{opacity:0;transform:scale(1.04)}
+  .recipe-num{position:absolute;left:20px;top:20px;background:var(--paper);color:var(--bark);font-family:"Bricolage Grotesque";font-weight:800;border-radius:999px;padding:.35rem .9rem;font-size:.9rem}
+  .recipe-info{transition:opacity .35s}
+  .recipe-info.swap{opacity:0}
+  .recipe-info h3{font-size:clamp(2.6rem,5vw,4.2rem);color:var(--bark)}
+  .recipe-info h3 .serif{display:block;font-size:.55em;color:var(--rust);margin-top:.35rem;letter-spacing:-.01em}
+  .recipe-info > p{color:var(--muted);margin:1.4rem 0 2rem;font-size:1.06rem;max-width:560px}
+  .ingredients{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:2rem}
+  .ingredient{background:var(--cream);border-radius:18px;padding:1.1rem 1rem}
+  .ingredient b{display:block;color:var(--bark);font-size:.98rem;margin-bottom:.25rem}
+  .ingredient span{font-size:.85rem;color:var(--muted);line-height:1.45;display:block}
+  .recipe-foot{font-size:.85rem;color:var(--muted);margin-top:1.2rem}
+  .built{margin-top:5rem;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;counter-reset:b}
+  .built div{border-top:2px solid var(--bark);padding-top:1rem;font-size:.95rem;color:var(--muted)}
+  .built b{display:block;color:var(--bark);font-family:"Bricolage Grotesque";font-size:1.15rem;margin-bottom:.3rem;letter-spacing:-.02em}
+
+  /* PLAN CALCULATOR */
+  .plan{background:var(--paper);padding-top:40px}
+  .plan-card{background:var(--bark);color:var(--cream);border-radius:40px;padding:clamp(2rem,5vw,4.5rem);display:grid;grid-template-columns:1fr 1fr;gap:4rem;position:relative;overflow:hidden}
+  .plan-card::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(242,138,58,.35),transparent 65%);right:-160px;top:-180px}
+  .plan-card h2{font-size:clamp(2.2rem,4.5vw,3.6rem);color:#fff;margin:1rem 0}
+  .plan-card h2 .serif{color:var(--saffron)}
+  .plan-card .eyebrow{color:var(--saffron)}
+  .plan-card > div > p{color:#d9c3a8;font-size:1.06rem;max-width:440px}
+  .steps{list-style:none;margin-top:2.2rem;display:grid;gap:1.1rem}
+  .steps li{display:flex;gap:1rem;align-items:flex-start;color:#e8d6bf;font-size:.97rem}
+  .steps li b{color:#fff;display:block}
+  .steps .n{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-weight:700;color:var(--saffron);font-family:"Bricolage Grotesque"}
+  .calc{background:var(--cream);color:var(--ink);border-radius:28px;padding:2rem;position:relative;z-index:1;align-self:center}
+  .calc h3{font-size:1.4rem;color:var(--bark);margin-bottom:1.4rem;letter-spacing:-.02em}
+  .field{margin-bottom:1.4rem}
+  .field label,.field .lbl{display:flex;justify-content:space-between;font-weight:600;font-size:.92rem;color:var(--bark);margin-bottom:.6rem}
+  .field output{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.1rem}
+  .field input[type=text]{width:100%;padding:.85rem 1rem;border-radius:14px;border:1.5px solid var(--line);font:inherit;background:#fff;color:var(--ink)}
+  .field input[type=text]:focus{outline:none;border-color:var(--orange)}
+  input[type=range]{width:100%;accent-color:var(--rust);height:6px}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;background:#efe2d1;border-radius:14px;padding:4px}
+  .seg button{border:0;background:transparent;padding:.65rem .4rem;border-radius:11px;font:600 .88rem "DM Sans";color:var(--muted);cursor:pointer;transition:all .2s}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--bark);box-shadow:0 2px 8px rgba(71,36,12,.12)}
+  .result{background:#fff;border-radius:20px;padding:1.3rem 1.4rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:1.6rem 0 1.2rem}
+  .result small{display:block;font-size:.8rem;color:var(--muted)}
+  .result strong{font-family:"Bricolage Grotesque";font-size:2.2rem;color:var(--bark);letter-spacing:-.03em;line-height:1.1}
+  .result .right{text-align:right}
+  .result .right strong{color:var(--rust);font-size:1.5rem}
+  .calc .btn{width:100%;justify-content:center}
+  .calc .fine{font-size:.76rem;color:var(--muted);margin-top:.9rem;line-height:1.45}
+
+  /* SAFETY */
+  .safety-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:center}
+  .regs{display:grid;gap:.9rem}
+  .reg{display:flex;align-items:center;gap:1.1rem;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:1.1rem 1.3rem}
+  .reg .ic{flex:none;width:44px;height:44px;border-radius:14px;background:#e6efd9;color:var(--sage);display:grid;place-items:center}
+  .reg .ic svg{width:22px;height:22px}
+  .reg b{display:block;color:var(--bark)}
+  .reg span{font-size:.9rem;color:var(--muted)}
+  .badges{display:flex;gap:1rem;margin-top:2rem;align-items:center;flex-wrap:wrap}
+  .badge{height:84px;padding:12px 18px;border-radius:18px;display:flex;align-items:center;gap:.8rem;font-size:.82rem;line-height:1.25;font-weight:600}
+  .badge img{height:100%;width:auto}
+  .badge.dark{background:var(--bark);color:#fff}
+  .badge.light{background:#fff;color:var(--bark);border:1px solid var(--line)}
+  .storage{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1rem}
+  .storage div{background:var(--cream);border-radius:16px;padding:1rem;text-align:center;border:1px solid var(--line)}
+  .storage b{display:block;font-family:"Bricolage Grotesque";font-size:1.6rem;color:var(--bark);letter-spacing:-.03em}
+  .storage span{font-size:.8rem;color:var(--muted)}
+
+  /* STORIES */
+  .stories{background:var(--tan)}
+  .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .story{background:var(--paper);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s}
+  .story:hover{transform:translateY(-6px) rotate(-.5deg)}
+  .story-img{aspect-ratio:4/3.3;overflow:hidden;position:relative}
+  .story-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .story:hover .story-img img{transform:scale(1.06)}
+  .story-name{position:absolute;left:16px;bottom:16px;background:var(--paper);color:var(--bark);font-family:"Bricolage Grotesque";font-weight:800;font-size:1.2rem;padding:.3rem 1rem;border-radius:999px}
+  .story-body{padding:1.6rem 1.6rem 1.8rem;display:flex;flex-direction:column;gap:1rem;flex:1}
+  .stars{color:var(--orange);letter-spacing:.15em;font-size:.95rem}
+  .story blockquote{color:var(--ink);font-size:1rem;flex:1}
+  .story cite{font-style:normal;font-weight:600;color:var(--muted);font-size:.9rem}
+
+  /* FAQ */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:start}
+  .faq-side{position:sticky;top:100px}
+  .faq-side .contact-box{margin-top:2rem;background:var(--paper);border-radius:var(--radius);padding:1.6rem;border:1px solid var(--line)}
+  .faq-side .contact-box b{color:var(--bark);display:block;margin-bottom:.4rem}
+  .faq-side .contact-box p{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
+  details{border-bottom:1px solid var(--line);padding:1.4rem 0}
+  details:first-child{border-top:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;font-family:"Bricolage Grotesque";font-weight:700;font-size:1.25rem;color:var(--bark);letter-spacing:-.02em}
+  summary::-webkit-details-marker{display:none}
+  summary .pm{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--bark);position:relative;transition:background .25s,transform .35s}
+  summary .pm::before,summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--bark);transform:translate(-50%,-50%)}
+  summary .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+  details[open] summary .pm{background:var(--bark)}
+  details[open] summary .pm::before,details[open] summary .pm::after{background:#fff}
+  details[open] summary .pm::after{transform:translate(-50%,-50%) rotate(0)}
+  details p,details ul{color:var(--muted);margin-top:.9rem;max-width:640px}
+  details ul{padding-left:1.2rem}
+
+  /* CTA */
+  .cta{padding:0 0 120px}
+  .cta-card{position:relative;border-radius:40px;overflow:hidden;background:var(--saffron);min-height:540px;display:flex;align-items:center}
+  .cta-card img{position:absolute;top:0;right:0;width:62%;height:100%;object-fit:cover;object-position:60% 40%}
+  .cta-card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(246,184,26,1) 0%,rgba(246,184,26,1) 38%,rgba(246,184,26,0) 52%)}
+  .cta-content{position:relative;z-index:2;padding:clamp(2rem,6vw,5rem);max-width:640px}
+  .cta-content h2{font-size:clamp(2.6rem,5.5vw,4.6rem);color:var(--bark-deep)}
+  .cta-content h2 .serif{color:var(--rust)}
+  .cta-content p{color:#5a3810;font-size:1.12rem;margin:1.2rem 0 2rem;max-width:440px}
+  .cta-note{display:flex;gap:.6rem;align-items:flex-start;margin-top:2rem;font-size:.85rem;color:#5a3810;max-width:430px;line-height:1.45}
+  .cta-note svg{flex:none;width:18px;height:18px;margin-top:2px}
+
+  /* FOOTER */
+  footer{background:var(--bark-deep);color:#cdb79c;padding:90px 0 36px;border-radius:48px 48px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:3rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+  footer .brand-name{color:#fff;font-size:1.6rem}
+  footer .about{margin-top:1.2rem;font-size:.95rem;max-width:340px}
+  footer h4{color:#fff;font-family:"Bricolage Grotesque";font-size:1rem;margin-bottom:1.1rem;letter-spacing:-.01em}
+  footer ul{list-style:none;display:grid;gap:.6rem;font-size:.95rem}
+  footer a{text-decoration:none;transition:color .2s}
+  footer a:hover{color:var(--orange)}
+  .socials{display:flex;gap:.6rem;margin-top:1.4rem}
+  .socials a{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;transition:all .25s}
+  .socials a:hover{background:var(--orange);border-color:var(--orange);color:var(--bark-deep)}
+  .socials svg{width:18px;height:18px}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;font-size:.85rem;color:#9b8466}
+  .wordmark{font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.05em;font-size:clamp(4rem,15.5vw,14rem);line-height:.8;color:rgba(255,255,255,.05);margin-top:2.5rem;white-space:nowrap;text-align:center;user-select:none}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+  /* RESPONSIVE */
+  @media (max-width:1060px){
+    .why-grid{grid-template-columns:1fr 1fr}
+    .built{grid-template-columns:repeat(3,1fr)}
+    .plan-card{grid-template-columns:1fr;gap:2.5rem}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:900px){
+    .nav-links{position:fixed;inset:78px 0 auto 0;flex-direction:column;align-items:flex-start;gap:0;background:var(--cream);padding:1rem 24px 1.6rem;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .35s;z-index:-1}
+    .nav-links.open{transform:none}
+    .nav-links li{width:100%}
+    .nav-links a:not(.btn){display:block;padding:.85rem 0;font-size:1.1rem;border-bottom:1px solid var(--line)}
+    .nav-links .btn{margin-top:1rem;width:100%;justify-content:center}
+    .menu-toggle{display:block}
+    .hero{padding:32px 0 80px}
+    .hero-grid,.recipe-stage,.safety-grid,.faq-grid,.why-head{grid-template-columns:1fr;gap:2.5rem}
+    .why-photo{aspect-ratio:4/3;transform:none}
+    .band{padding:0 16px 90px}
+    .band-card{border-radius:28px;min-height:520px}
+    .hero-visual{max-width:520px;margin:0 auto;width:100%}
+    .story-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+    .faq-side{position:static}
+    .recipe-photo{aspect-ratio:4/3.4}
+    section{padding:90px 0}
+    .cta-card{flex-direction:column;align-items:stretch;min-height:0}
+    .cta-card::after{display:none}
+    .cta-card img{position:relative;width:100%;height:320px;object-position:62% 35%}
+    .cta-content{padding-top:2rem}
+  }
+  @media (max-width:600px){
+    body{font-size:16px}
+    .topbar .hide-sm{display:none}
+    .wrap{padding:0 16px}
+    .why-grid,.ingredients{grid-template-columns:1fr}
+    .built{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .sticker{width:104px;height:104px}
+    .sticker span{font-size:1.7rem}
+    .chip-float{font-size:.75rem}
+    .chip-a{left:0}
+    .storage b{font-size:1.3rem}
+    .recipe-tab{padding-right:.9rem;font-size:.92rem}
+    .recipe-tab img{width:34px;height:34px}
+    .result{flex-direction:column;align-items:flex-start}
+    .result .right{text-align:left}
+    .plan-card,.cta-card{border-radius:28px}
+    .recipes,footer{border-radius:32px 32px 0 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Fresh meals for <strong>healthy adult dogs</strong><span class="hide-sm"> · Made in Copenhagen</span> · Delivered frozen</div>
+
+<header id="top">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top" aria-label="Bone Appetite home">
+      <span class="brand-mark"><img src="images/logo.webp" alt=""></span>
+      <span class="brand-name">Bone<span>appetite</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#why">Why us</a></li>
+      <li><a href="#recipes">Recipes</a></li>
+      <li><a href="#plan">How it works</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a class="login" href="https://boneappetitedk.com/login">Log in</a></li>
+      <li><a class="btn btn-primary" href="#plan">Build your plan</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow reveal"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="9" r="2.4"/><circle cx="9.5" cy="5" r="2.4"/><circle cx="14.5" cy="5" r="2.4"/><circle cx="19" cy="9" r="2.4"/><path d="M12 10.5c-3.6 0-6.5 4.6-6.5 7.2 0 2 1.6 2.8 3.2 2.8 1.4 0 2.2-.8 3.3-.8s1.9.8 3.3.8c1.6 0 3.2-.8 3.2-2.8 0-2.6-2.9-7.2-6.5-7.2z"/></svg>Fresh dog food · Copenhagen</span>
+      <h1 class="reveal d1">Real food, <span class="serif">gently cooked</span> for your dog.</h1>
+      <p class="hero-lede reveal d2">Professionally formulated recipes, sous-vide cooked in small batches with carefully selected ingredients. Complete daily nutrition for healthy adult dogs — delivered frozen and ready to serve.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn btn-primary" href="#plan">Create your dog’s plan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <span class="price-note">Plans from approx.<br><b>68 DKK / day</b></span>
+      </div>
+      <div class="trust reveal d3">
+        <div><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>FEDIAF</b>nutrition standards</span></div>
+        <div><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>HACCP</b>food safety</span></div>
+        <div><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>EU</b>feed regulations</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal d2">
+      <div class="hero-blob"></div>
+      <div class="hero-photo"><img src="images/hero.jpg" alt="Four vacuum-sealed Bone Appetite meal packs next to a bowl of freshly cooked dog food"></div>
+      <img class="plate" src="images/beef.png" alt="">
+      <div class="sticker"><div><small>4 recipes</small><span>100%</span><em>real food</em></div></div>
+      <div class="chip-float chip-a"><i>🥕</i>Sous-vide cooked</div>
+      <div class="chip-float chip-b"><i>❄️</i>Delivered frozen</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Small-batch preparation</span><span>FEDIAF-aligned nutrition</span><span>Sous-vide cooked</span><span>Made in Copenhagen</span><span>No artificial colourants</span><span>Vacuum sealed &amp; frozen</span>
+    <span>Small-batch preparation</span><span>FEDIAF-aligned nutrition</span><span>Sous-vide cooked</span><span>Made in Copenhagen</span><span>No artificial colourants</span><span>Vacuum sealed &amp; frozen</span>
+  </div>
+</div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-head">
+      <div class="section-head reveal">
+        <span class="eyebrow">What makes us different</span>
+        <h2>The food you’d cook at home — <span class="serif">if you had a nutritionist</span> and a chef.</h2>
+        <p>We started with a simple question: why can’t dog food be as healthy as what we’d make at home? Every bowl is our answer.</p>
+      </div>
+      <figure class="why-photo reveal d1"><img src="images/stock-dog-kitchen.jpg" alt="A dog sitting on a kitchen floor looking up, waiting for dinner" loading="lazy"><figcaption>“Is it dinner yet?”</figcaption></figure>
+    </div>
+    <div class="why-grid">
+      <article class="why-card reveal">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c5-2 8-6 8-11V4c-5 0-9 2-10 6"/><path d="M4 21c0-6 3-10 9-12"/><path d="M4 14c0-4 2-7 6-8"/></svg></div>
+        <h3>Fresh ingredients</h3>
+        <p>Real meat, organ and vegetables — freshly prepared through a carefully controlled cooking process.</p>
+      </article>
+      <article class="why-card reveal d1">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.9A4 4 0 1 1 8 6.3a4.5 4.5 0 0 1 8 0 4 4 0 1 1 2 7.6V20H6z"/><path d="M6 17h12"/></svg></div>
+        <h3>Cooked by chefs</h3>
+        <p>Gently sous-vide cooked, then portioned, vacuum sealed and frozen to lock in quality and safety.</p>
+      </article>
+      <article class="why-card reveal d2">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></div>
+        <h3>Nothing artificial</h3>
+        <p>No artificial colourants. No unnecessary additives. No fillers, meat meals or rendered by-products.</p>
+      </article>
+      <article class="why-card reveal d3">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M7 15h10"/></svg></div>
+        <h3>Nutritionist formulated</h3>
+        <p>Developed by food technologists and pet nutritionists to FEDIAF guidelines for complete daily nutrition.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE BAND -->
+<div class="band">
+  <div class="band-card reveal">
+    <img src="images/stock-owner-hug.jpg" alt="A woman hugging her dog in a warm, sunlit kitchen" loading="lazy">
+    <div class="band-content">
+      <h2>Cooked the way you’d cook <span class="serif">for family.</span></h2>
+      <div class="stats">
+        <div><b>4</b><span>chef-made recipes</span></div>
+        <div><b>0</b><span>artificial colourants</span></div>
+        <div><b>100%</b><span>made in Copenhagen</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECIPES -->
+<section class="recipes" id="recipes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The menu</span>
+      <h2>Four recipes. <span class="serif">Zero guesswork.</span></h2>
+      <p>Animal protein, vegetables and carefully selected nutrients — each one formulated for adult maintenance and portioned for consistent daily feeding.</p>
+    </div>
+
+    <div class="recipe-tabs reveal" role="tablist" aria-label="Recipes">
+      <button class="recipe-tab" role="tab" aria-selected="true" data-r="0"><img src="images/chicken.png" alt="">Chicken</button>
+      <button class="recipe-tab" role="tab" aria-selected="false" data-r="1"><img src="images/beef.png" alt="">Beef</button>
+      <button class="recipe-tab" role="tab" aria-selected="false" data-r="2"><img src="images/fish.png" alt="">Fish</button>
+      <button class="recipe-tab" role="tab" aria-selected="false" data-r="3"><img src="images/lamb.png" alt="">Lamb</button>
+    </div>
+
+    <div class="recipe-stage reveal" role="tabpanel">
+      <div class="recipe-photo"><img id="rImg" src="images/chicken-recipe.jpg" alt="Chicken with beetroot and berries"><span class="recipe-num" id="rNum">01 / 04</span></div>
+      <div class="recipe-info" id="rInfo">
+        <h3 id="rTitle">Chicken <span class="serif">with beetroot &amp; berries</span></h3>
+        <p id="rDesc"></p>
+        <div class="ingredients" id="rIng"></div>
+        <a class="btn btn-primary" href="#plan">Build a plan with this recipe <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="recipe-foot">Every recipe is completed with fish oil, seaweed and bone powder for a complete nutritional profile.</p>
+      </div>
+    </div>
+
+    <div class="built">
+      <div class="reveal"><b>Animal protein</b>Chicken, beef, lamb or fish</div>
+      <div class="reveal d1"><b>Beef liver</b>A natural source of micronutrients</div>
+      <div class="reveal d2"><b>Veg &amp; fruit</b>Fibre and plant nutrients</div>
+      <div class="reveal d3"><b>Good carbs</b>Rice, potato or sweet potato</div>
+      <div class="reveal d3"><b>Essentials</b>Fish oil, seaweed, bone powder</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section class="plan" id="plan">
+  <div class="wrap">
+    <div class="plan-card reveal">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2>A plan built around <span class="serif">your</span> dog.</h2>
+        <p>Daily portions are calculated from recognised energy requirements and FEDIAF reference guidelines — then cooked, portioned and delivered.</p>
+        <ol class="steps">
+          <li><span class="n">1</span><span><b>Tell us about your dog</b>Weight, age and activity level.</span></li>
+          <li><span class="n">2</span><span><b>Get your personalised plan</b>Including a transition guide for switching foods.</span></li>
+          <li><span class="n">3</span><span><b>Fresh meals, delivered frozen</b>Portioned per day and ready to serve — no cooking needed.</span></li>
+        </ol>
+      </div>
+      <form class="calc" id="calc" onsubmit="return false">
+        <h3>Try it — what does your dog need?</h3>
+        <div class="field">
+          <label for="dogName">Your dog’s name</label>
+          <input type="text" id="dogName" placeholder="e.g. Baloo" maxlength="20" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="weight">Weight <output id="wOut">15 kg</output></label>
+          <input type="range" id="weight" min="2" max="60" value="15">
+        </div>
+        <div class="field">
+          <span class="lbl">Activity level</span>
+          <div class="seg" id="activity">
+            <button type="button" data-k="95" aria-pressed="false">Relaxed</button>
+            <button type="button" data-k="110" aria-pressed="true">Active</button>
+            <button type="button" data-k="130" aria-pressed="false">Very active</button>
+          </div>
+        </div>
+        <div class="result" aria-live="polite">
+          <div><small id="rLabel">Your dog needs about</small><strong id="kcal">835 kcal</strong><small>per day</small></div>
+          <div class="right"><small>Plans from</small><strong>~68 DKK</strong><small>per day</small></div>
+        </div>
+        <a class="btn btn-orange" href="https://boneappetitedk.com/register" id="planBtn">Get the full plan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="fine">Estimate based on FEDIAF maintenance energy guidelines for healthy adult dogs. Your final plan and price are tailored to weight, activity and chosen recipes.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY -->
+<section id="safety">
+  <div class="wrap safety-grid">
+    <div class="reveal">
+      <span class="eyebrow">Food safety &amp; compliance</span>
+      <div class="section-head" style="margin-bottom:0">
+        <h2>Made in our own <span class="serif">licensed kitchen</span> in Copenhagen.</h2>
+        <p>We cook and package everything ourselves — nothing outsourced, nothing hidden. Every ingredient is traceable, every batch logged, every pack clearly labelled.</p>
+      </div>
+      <div class="badges">
+        <div class="badge dark"><img src="images/fediaf.svg" alt="FEDIAF logo">FEDIAF<br>guidelines</div>
+        <div class="badge light"><img src="images/haccp.svg" alt="HACCP logo">HACCP-based<br>procedures</div>
+      </div>
+    </div>
+    <div class="reveal d1">
+      <div class="regs">
+        <div class="reg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><div><b>EU Feed Hygiene Regulation 183/2005</b><span>Production approved and operating to EU feed hygiene rules</span></div></div>
+        <div class="reg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><div><b>Regulation (EC) No 767/2009</b><span>Clear, compliant labelling on every pack</span></div></div>
+        <div class="reg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>HACCP-based food safety</b><span>Controlled, logged sous-vide preparation</span></div></div>
+        <div class="reg"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H14a4 4 0 0 1 0 8h-4a4 4 0 0 0 0 8h5.5"/></svg></span><div><b>Ingredient traceability</b><span>Every ingredient traced back to its source</span></div></div>
+      </div>
+      <div class="storage">
+        <div><b>3 mo</b><span>in the freezer</span></div>
+        <div><b>~7 days</b><span>fridge, unopened</span></div>
+        <div><b>2–3 days</b><span>fridge, once opened</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories" id="stories">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Stories of transformation</span>
+      <h2>From picky eaters to <span class="serif">happy waggers.</span></h2>
+    </div>
+    <div class="story-grid">
+      <article class="story reveal">
+        <div class="story-img"><img src="images/leizer.jpg" alt="Leizer the dog" loading="lazy"><span class="story-name">Leizer</span></div>
+        <div class="story-body">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>“Leizer’s sensitive stomach meant constant vet visits, but since switching to Bone Appetite she’s been so much better. They took the time to understand her issues and provided meals that have been a perfect match. Highly recommended!”</blockquote>
+          <cite>— Philip</cite>
+        </div>
+      </article>
+      <article class="story reveal d1">
+        <div class="story-img"><img src="images/baloo.jpg" alt="Baloo the dog" loading="lazy"><span class="story-name">Baloo</span></div>
+        <div class="story-body">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>“I was looking for a healthier option for Baloo, and Bone Appetite exceeded my expectations. Baloo’s coat is shinier, and he’s more playful than ever. The team is always there to answer my questions.”</blockquote>
+          <cite>— Annika</cite>
+        </div>
+      </article>
+      <article class="story reveal d2">
+        <div class="story-img"><img src="images/wufi.jpg" alt="Wufi the dog" loading="lazy"><span class="story-name">Wufi</span></div>
+        <div class="story-body">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>“Wufi used to be so picky with his food, but now he can’t wait for mealtime! I love how the team checks in to see how Wufi is doing. It’s been a fantastic experience.”</blockquote>
+          <cite>— Zoe</cite>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-side reveal">
+      <span class="eyebrow">Good questions</span>
+      <div class="section-head" style="margin-bottom:0"><h2>Everything you’re <span class="serif">wondering.</span></h2></div>
+      <img class="faq-photo" src="images/stock-dog-eating.jpg" alt="A fluffy dog eating from a bowl in the grass" loading="lazy">
+      <div class="contact-box">
+        <b>Still unsure which recipe fits?</b>
+        <p>Tell us about allergies, sensitivities or special needs — we’ll help you choose the gentlest meal.</p>
+        <a class="btn btn-line" href="mailto:info@boneappetitedk.com">Ask our team</a>
+      </div>
+    </div>
+    <div class="reveal d1">
+      <details open>
+        <summary>Are Bone Appetite meals raw?<span class="pm"></span></summary>
+        <p>No — and that’s what makes them so gentle. Our meals are freshly cooked, not raw or processed like kibble. Every batch is prepared at low temperatures to keep nutrients and flavour while ensuring complete safety.</p>
+      </details>
+      <details>
+        <summary>Why cooked food instead of kibble or raw?<span class="pm"></span></summary>
+        <p>Cooked food offers a middle path — fresh, digestible and safe. Dogs often have fewer stomach upsets, better hydration and a softer coat on gently cooked meals. We don’t claim miracles, but we do promise quality, transparency and love in every bite.</p>
+      </details>
+      <details>
+        <summary>Do your recipes meet nutritional standards?<span class="pm"></span></summary>
+        <p>Yes. All our Complete recipes meet or exceed the FEDIAF 2024 Nutritional Guidelines for adult maintenance when fed as directed.</p>
+      </details>
+      <details>
+        <summary>Do I need to cook it myself?<span class="pm"></span></summary>
+        <p>No cooking, no mess. The food arrives ready to serve — straight from the fridge, or slightly warmed with a spoon of warm water. Dogs adore the aroma when it’s a little warm.</p>
+      </details>
+      <details>
+        <summary>Should I ask my vet before switching?<span class="pm"></span></summary>
+        <p>It’s always wise, especially if your dog is a puppy, senior, pregnant/lactating or has a medical condition. Bone Appetite meals are for healthy adult dogs and are not veterinary therapy.</p>
+      </details>
+      <details>
+        <summary>What improvements might I see?<span class="pm"></span></summary>
+        <ul><li>Healthier digestion</li><li>Smaller, less smelly stools</li><li>Shinier coat and steady energy</li></ul>
+        <p>Every dog is unique, so results vary — but we’ll celebrate every small win with you.</p>
+      </details>
+      <details>
+        <summary>Why not just cook at home?<span class="pm"></span></summary>
+        <p>You absolutely can — but balancing nutrients is tricky. Research shows that more than 90% of homemade dog-food recipes online miss essential nutrients or have unsafe ratios. We give you the goodness of home cooking without the worry.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <img src="images/dog-licking.jpg" alt="A happy dog licking its lips" loading="lazy">
+      <div class="cta-content">
+        <h2>Dinner’s about to get <span class="serif">a lot</span> more exciting.</h2>
+        <p>Build your dog’s personalised plan in two minutes. Freshly prepared, professionally formulated, made in Copenhagen.</p>
+        <a class="btn btn-primary" href="https://boneappetitedk.com/register">Create your dog’s plan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="cta-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>Intended for healthy adult dogs. If your dog is a puppy, senior, pregnant or has a medical condition, please consult your vet first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark"><img src="images/logo.webp" alt=""></span><span class="brand-name">Bone<span>appetite</span></span></a>
+        <p class="about">Founded on the principle that every dog deserves to eat real, fresh food. Why can’t dog food be as healthy as what we’d make at home?</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/profile.php?id=61551003748280" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1 1-1h2V2.2L14.3 2C11.5 2 10.6 4 10.6 5.8v2.7H8V12h2.6v10H14V12h2.7l.4-3.5z"/></svg></a>
+          <a href="https://www.instagram.com/boneappetite.dk/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="#why">Why Bone Appetite</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#plan">How it works</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <ul><li><a href="https://boneappetitedk.com/register">Build your plan</a></li><li><a href="https://boneappetitedk.com/login">Log in</a></li><li><a href="#stories">Customer stories</a></li></ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="https://www.google.com/maps/place/Strandlodsvej+19b,+2300+K%C3%B8benhavn" target="_blank" rel="noopener">Strandlodsvej 19b<br>2300 København S</a></li>
+          <li><a href="mailto:info@boneappetitedk.com">info@boneappetitedk.com</a></li>
+          <li><a href="tel:+4552689191">+45 52 68 91 91</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Bone Appetite · CVR 44927438</span>
+      <span>Freshly prepared in Copenhagen 🇩🇰</span>
+    </div>
+    <div class="wordmark" aria-hidden="true">boneappetite</div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header shadow
+  const header = document.querySelector('header');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), {passive:true});
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle'), links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Recipes
+  const recipes = [
+    {name:'Chicken', sub:'with beetroot & berries', img:'chicken-recipe.jpg',
+     desc:'Minced chicken and beef liver with beetroot and carrot, plus carbohydrates from rice. A balanced mix of animal protein, fibre and naturally occurring micronutrients — gently cooked sous-vide, portioned and vacuum sealed.',
+     ing:[['Beetroot','Fibre plus vitamin C and potassium'],['Broccoli','Naturally occurring vitamins and plant compounds'],['Dried berries','Natural antioxidants and plant nutrients']]},
+    {name:'Beef', sub:'with spinach & pumpkin', img:'beef-recipe.jpg',
+     desc:'Minced beef and beef liver with pumpkin, carrot and spinach, plus carbohydrates from rice. Animal protein and plant ingredients contributing naturally occurring vitamins and minerals — portioned, sealed and delivered frozen.',
+     ing:[['Carrot','Fibre and naturally occurring micronutrients'],['Spinach','Naturally occurring vitamins and plant nutrients'],['Pumpkin','A gentle source of fibre']]},
+    {name:'Fish', sub:'with red peppers & butternut squash', img:'fish-recipe.jpg',
+     desc:'Fish and beef liver with butternut squash, red pepper and carbohydrates from potato. Animal protein and naturally occurring fatty acids, with fibre from vegetables — sous-vide cooked and frozen to maintain quality.',
+     ing:[['Red pepper','Naturally occurring vitamin C'],['Butternut squash','Fibre and naturally occurring vitamins'],['Potato','Carbohydrates for steady energy']]},
+    {name:'Lamb', sub:'with red cabbage & sweet potato', img:'lamb-recipe.jpg',
+     desc:'Minced lamb and beef liver with red cabbage and sweet potato. Animal protein, carbohydrates and vegetable fibre — carefully formulated, gently cooked and portioned for daily feeding.',
+     ing:[['Red cabbage','Naturally occurring vitamins and plant compounds'],['Apple','Fibre and plant-based nutrients'],['Sweet potato','Carbohydrates and fibre']]}
+  ];
+  recipes.forEach(r => { const i = new Image(); i.src = 'images/' + r.img; });
+  const rImg = document.getElementById('rImg'), rInfo = document.getElementById('rInfo');
+  function renderRecipe(i, animate){
+    const r = recipes[i];
+    const apply = () => {
+      rImg.src = 'images/' + r.img; rImg.alt = r.name + ' ' + r.sub;
+      document.getElementById('rNum').textContent = '0' + (i+1) + ' / 04';
+      document.getElementById('rTitle').innerHTML = r.name + ' <span class="serif">' + r.sub.replace('&','&amp;') + '</span>';
+      document.getElementById('rDesc').textContent = r.desc;
+      document.getElementById('rIng').innerHTML = r.ing.map(([b,s]) => '<div class="ingredient"><b>'+b+'</b><span>'+s+'</span></div>').join('');
+      rImg.classList.remove('swap'); rInfo.classList.remove('swap');
+    };
+    if (!animate) return apply();
+    rImg.classList.add('swap'); rInfo.classList.add('swap');
+    setTimeout(apply, 280);
+  }
+  document.querySelectorAll('.recipe-tab').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.recipe-tab').forEach(x => x.setAttribute('aria-selected', x === t));
+    renderRecipe(+t.dataset.r, true);
+  }));
+  renderRecipe(0, false);
+
+  // Plan estimator — FEDIAF adult maintenance energy: k × kg^0.75 kcal/day
+  const w = document.getElementById('weight'), wOut = document.getElementById('wOut'), nameIn = document.getElementById('dogName');
+  let k = 110;
+  function calc(){
+    const kg = +w.value;
+    wOut.textContent = kg + ' kg';
+    const kcal = Math.round(k * Math.pow(kg, .75) / 5) * 5;
+    document.getElementById('kcal').textContent = kcal.toLocaleString('da-DK') + ' kcal';
+    const n = nameIn.value.trim();
+    document.getElementById('rLabel').textContent = (n ? n : 'Your dog') + ' needs about';
+    document.getElementById('planBtn').firstChild.textContent = n ? 'Get ' + n + '’s full plan ' : 'Get the full plan ';
+  }
+  w.addEventListener('input', calc); nameIn.addEventListener('input', calc);
+  document.querySelectorAll('#activity button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#activity button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    k = +b.dataset.k; calc();
+  }));
+  calc();
+</script>
+</body>
+</html>
